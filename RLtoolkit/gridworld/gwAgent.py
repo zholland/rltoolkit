@@ -364,8 +364,8 @@ class DynaGridAgent(DeterministicForwardModel, GridAgent):
         self.learnworldmodel(s, a, sprime, reward)
         for i in range(self.nummodelsteps):
             for j in range(10 * self.nummodelsteps):
-                s = randrange(self.numstates)
-                a = randrange(self.numactions)
+                s = random.randrange(self.numstates)
+                a = random.randrange(self.numactions)
                 sp = self.getpredictednextstate(s, a)
                 r = self.getpredictedreward(s, a)
                 if r == None:

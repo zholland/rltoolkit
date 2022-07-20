@@ -14,7 +14,7 @@ Reward is +1 for reaching the goal, 0 else.
 
 from RLtoolkit.utilities import *
 from RLtoolkit.basicclasses import *
-from random import *
+import random
 from math import *
 import operator
 
@@ -163,9 +163,9 @@ class ObjectGridworld(Gridworld):
 
 class GPGridworld(Gridworld):
     def envstartepisode(self):
-        randomstart = randrange(self.numsquares)
+        randomstart = random.randrange(self.numsquares)
         while self.barrierp[randomstart]:
-            randomstart = randrange(self.numsquares)
+            randomstart = random.randrange(self.numsquares)
         self.state = randomstart
         return randomstart
 
