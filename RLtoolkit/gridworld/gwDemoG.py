@@ -53,8 +53,10 @@ def runObjDemo(
     epsilon=0.05,
     lambda_=0.8,
     walls=None,
+    seed=None,
 ):
-  random.seed(42)
+  if seed is not None:
+    random.seed(seed)
 
   agent_class = functools.partial(agent_class, alpha=alpha, epsilon=epsilon,
                                   agentlambda=lambda_)
@@ -71,11 +73,11 @@ def runObjDemo(
 
   if speed < 0:
     for _ in range(0, speed, -1):
-      print(f'speed slow')
+      print('speed slow')
       window.simSlower()
   elif speed > 0:
     for _ in range(speed):
-      print(f'speed fast')
+      print('speed fast')
       window.simFaster()
 
   gMainloop()
@@ -99,7 +101,7 @@ def main():
                             "to the default speed (default=0)."),
                       default=0, type=int)
   parser.add_argument("-a", "--agent",
-                      help=(f"The agent class to run. "
+                      help=("The agent class to run. "
                             f"Options are: {list(AGENT_CLASSES.keys())}."),
                       default="Dyna", type=str)
   parser.add_argument("--alpha", help="The agent step size.", default=0.5,
@@ -112,6 +114,8 @@ def main():
                       help=("The eligibility trace decay rate. For agents "
                             "without traces, this argument has no effect."),
                       default=0.8, type=float)
+  parser.add_argument("--seed", help="The seed for the random number generator",
+                      default=None, type=int)
   parser.add_argument("--walls",
                       nargs='+', default=[], type=int,
                       help=("A list of locations to place barriers "
@@ -123,7 +127,8 @@ def main():
   runObjDemo(width=args.width, height=args.height, start_state=args.start,
              goal_state=args.goal, square_size=args.size, speed=args.speed,
              agent_class=AGENT_CLASSES[args.agent], alpha=args.alpha,
-             epsilon=args.epsilon, lambda_=args.trace_decay, walls=args.walls)
+             epsilon=args.epsilon, lambda_=args.trace_decay, walls=args.walls,
+             seed=args.seed)
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ The goal square is a terminal state.  Reward is +1 for reaching the goal, 0 else
 
 from RLtoolkit.utilities import *
 from RLtoolkit.basicclasses import *
-from random import *
+import random
 from math import *
 import operator
 
